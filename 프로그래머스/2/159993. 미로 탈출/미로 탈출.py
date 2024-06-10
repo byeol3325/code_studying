@@ -1,7 +1,37 @@
 from collections import deque
-import copy
 
 dy = [1,-1,0,0]; dx = [0,0,1,-1]
+def go_list(maps: list, a: list, b: list)-> int:
+    """
+    go bfs (minimum move)
+    
+    Params
+        list a, b = location start, end
+    
+    Returns
+        int : minimum time, if can't go 'E', return -1
+    """
+    h = len(maps); w = len(maps[0])
+    q = deque(); visited = [[0]*w for _ in range(h)]
+    q.append([a[0], a[1], 0]); visited[a[0]][a[1]] = 1
+    
+    while q:
+        
+        y, x, dist = q.popleft()
+        
+        for i in range(4):
+            ny = y + dy[i]; nx = x + dx[i]
+            if ny < 0 or nx < 0 or ny >= h or nx >= w: # out of maps
+                continue
+            if maps[ny][nx] == 'X' or visited[ny][nx] == 1: # wall or visited
+                continue
+            if [ny, nx] == b: # arrive end point(b)
+                return dist + 1
+            
+            visited[ny][nx] = 1
+            q.append([ny, nx, dist+1])
+    return -1
+
 def go(maps: list, a: list, b: list)-> int:
     """
     go bfs (minimum move)
