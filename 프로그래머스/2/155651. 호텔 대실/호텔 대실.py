@@ -20,14 +20,22 @@ def can_next_time(a: str, b: str) -> int:
     return 0
 
 def solution(book_time: list) -> int:
+    """
+    get minimum the number of rooms
+    
+    Params
+        list book_time : the list of book times
+    Returns
+        int len(rooms) : the number of rooms
+    """
     rooms = [] # save end time
-    book_time = sorted(book_time)#, key = lambda x: (x[1], x[0])) # sort book time by end time
+    book_time = sorted(book_time) # sort book time
     
     for start, end in book_time:
         # if no room or need to more room
         if len(rooms) == 0 or can_next_time(rooms[0], start) == 0:
             hq.heappush(rooms, end)
-        elif can_next_time(rooms[0], start) == 1:
+        elif can_next_time(rooms[0], start) == 1: # can do next book time in one room
             hq.heappop(rooms)
             hq.heappush(rooms, end)
     
