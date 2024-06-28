@@ -13,8 +13,6 @@
 # 참가자의 상담 요청 정보가 주어질 때, 참가자가 상담을 요청했을 때부터 상담을 시작하기까지
 # '기다린 시간의 합의 최소'가 되도록 각 상담 유형별로 멘토 인원을 정하려 합니다.
 # 각 유형별로 멘토 인원 적어도 한명 이상이어야함.
-from itertools import permutations
-from collections import deque
 import heapq as hq
 
 def solve(n: int, waiting: list) -> int:
