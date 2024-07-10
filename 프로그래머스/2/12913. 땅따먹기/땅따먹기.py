@@ -5,11 +5,13 @@ def solution(land):
     DP = [[0]*row for _ in range(col)]
     DP[0] = land[0] # 첫줄 그대로
     
+    
     # DP[i-1][j] + DP[i][j] 는 안됨
     for i in range(1, col):
         for j in range(row):
-            DP[i][j] = land[i][j] + max(DP[i-1]) ### j 제외
-            if DP[i-1][j] + land[i][j] == DP[i][j]: # j가 포함됨
-                DP[i][j] = land[i][j] + max(DP[i-1][:j] + DP[i-1][j+1:])
+            pri_DP = DP[i-1].copy()
+            pri_DP[j] = 0 # j 제외
+            DP[i][j] = land[i][j] + max(pri_DP)
 
+    
     return max(DP[-1])
