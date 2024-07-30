@@ -2,9 +2,12 @@ from collections import defaultdict
 from collections import deque
 import heapq as hq
 
-
 LOCATIONS = {} #LOCATIONS[숫자판] = [y,x]
 def set_loc():
+    """
+    LOCATIONS[숫자판] = [y,x] 으로 숫자판 dictionary로 저장
+    ['1'] = [0,0] ...
+    """
     global LOCATIONS
     for i in range(1, 10):
         LOCATIONS[str(i)] = [(i-1)//3, (i-1)%3]
@@ -14,6 +17,10 @@ def set_loc():
     return None
 
 def set_w():
+    """
+    LOCATIONS[숫자판] = [y,x] 으로 숫자판 dictionary로 저장된 것을 이용해
+    weight_dict[시작점, 도착점] = 가중치 저장하는 판
+    """
     global LOCATIONS
     weight_dict = {} # [시작, 끝] = weight
     for i in range(10): # 0 ~ 9
@@ -34,7 +41,14 @@ def set_w():
         weight_dict[(str(i), '#')] = weight
     return weight_dict
 
-def cal_w(loc1, loc2):
+def cal_w(loc1:list, loc2:list) -> int:
+    """
+    loc1과 loc2 사이의 가중치 구하기
+    같으면 가중치 1
+    상하좌우로 인접하면 2
+    대각선이면 3
+    그것보다 더 멀면 최소로 움직일 수 있는 경로로 가중치
+    """
     dis_y = abs(loc1[0] - loc2[0])
     dis_x = abs(loc1[1] - loc2[1])
     
@@ -45,7 +59,10 @@ def cal_w(loc1, loc2):
         return 1
     return diag_mov*3 + next_mov*2
 
-def solution(numbers):
+def solution(numbers:str) -> int:
+    """
+    numbers를 치는데 가장 작은 가중치를 반환하는 함수
+    """
     global LOCATIONS
     answer = float("inf")
     
