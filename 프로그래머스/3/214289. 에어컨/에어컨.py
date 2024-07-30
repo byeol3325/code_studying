@@ -43,14 +43,13 @@ def solution(temperature: int, t1: int, t2: int, a: int, b: int, onboard: list) 
             # [time][temp]
             next_min = []
             if onboard[time] == 0 or (onboard[time] == 1 and t1 <= temp <= t2): # 승객이 탔을 때
-                if 0 <= temp + on_aircon <= 50:
-                    next_min.append(DP[time-1][temp+on_aircon] + a) # 에어컨 ON로 왔음
-                if 0 <= temp - on_aircon <= 50:
-                    next_min.append(DP[time-1][temp-on_aircon]) # 에어컨 OFF로 왔어
-                if temp == temperature:
+                if 0 <= temp + on_aircon <= 50: # 에어컨 ON로 왔음
+                    next_min.append(DP[time-1][temp+on_aircon] + a)
+                if 0 <= temp - on_aircon <= 50: # 에어컨 OFF로 왔어
+                    next_min.append(DP[time-1][temp-on_aircon]) 
+                if temp == temperature: # 외부온도가 같아
                     next_min.append(DP[time-1][temp])
-                if t1 <= temp <= t2:
-                    next_min.append(DP[time-1][temp] + b) # 에어컨 STAY로 왔어
+                next_min.append(DP[time-1][temp] + b) # 에어컨 STAY로 왔어
             
             if next_min == []: # 굳이 계산할 필요 없음
                 continue
