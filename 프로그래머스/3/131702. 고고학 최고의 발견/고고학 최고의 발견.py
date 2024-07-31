@@ -27,30 +27,27 @@ def turn(board: list, loc: list, cnt: int):
             board[nr][nc] = (board[nr][nc] + cnt)%4
     return None
     
-# 8*8 * 
 def solution(clockHands):
-    answer = 8 * 8 * 3
+    answer = 8 * 8 * 3 # 최대 돌렸을 때
     n = len(clockHands)
     
     end_board = [[0]*n for _ in range(n)]
     for one_case in product([0,1,2,3], n): # 첫 줄 돌리는 방법
         cnt = 0
         one_board = deepcopy(clockHands)
-        #print(one_board)
+        
         for j, one_turn in enumerate(one_case):
             turn(one_board, [0, j], one_turn)
             cnt += one_turn
-        #print(one_board)
-        #if stop == 2:
-        #    break
+        
         for i in range(1, n):
             for j in range(n):
-                needed_turn = (4-one_board[i-1][j])%4
-                if needed_turn != 0:
+                if one_board[i-1][j] != 0:
+                    needed_turn = (4-one_board[i-1][j])%4
                     turn(one_board, [i,j], needed_turn)
                     cnt += needed_turn
         
-        if one_board == end_board:
+        if all(x == 0 for x in one_board[-1]):
             answer = min(answer, cnt)
     
     # 최소한 조작으로 해결
