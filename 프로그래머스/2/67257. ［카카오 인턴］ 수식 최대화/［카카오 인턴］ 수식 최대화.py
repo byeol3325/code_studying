@@ -21,21 +21,11 @@ def get_info(line):
     return array, operator
 
 def do_compute(array, operator):
+    operator = list(operator)
     answer = -float("inf")
-    if len(operator) <= 1:
-        result = None
-        while array:
-            one = array.popleft()
-            if result == None:
-                result = one
-            elif one == "-":
-                result -= array.popleft()
-            elif one == "+":
-                result += array.popleft()
-            else: # one == "*":
-                result *= array.popleft()
-        answer = abs(result)
-    else: # len(operator) == 2 or 3
+    if len(operator) == 0:
+        return array[0]
+    else:
         cases = permutation(operator)
         for case in cases:
             case = deque(case) # 우선순위
@@ -67,10 +57,8 @@ def do_compute_oper(array: list, oper: str):
     return next_deque
             
 
-def permutation(operator: set):
+def permutation(operator):
     n = len(operator)
-    operator = list(operator)
-    
     visited = [0]*n
     results = []
     def make(one):
