@@ -20,12 +20,11 @@ def solution(target):
     
     for i in range(23, target+1):
         candidates = []
-        if i > 50:
-            candidates.append([NUM_DICT[i-50][0]+1, NUM_DICT[i-50][1]+1])
-        if i > 60:
-            candidates.append([NUM_DICT[i-60][0]+1, NUM_DICT[i-60][1]])
+        candidates.append([NUM_DICT[i-50][0]+1, NUM_DICT[i-50][1]+1])
+        candidates.append([NUM_DICT[i-60][0]+1, NUM_DICT[i-60][1]])
         candidates.append([NUM_DICT[i-20][0]+1, NUM_DICT[i-20][1]+1])
         candidates.append(NUM_DICT[i])
+        
         candidates.sort(key=lambda x:(x[0],-x[1]))
         NUM_DICT[i] = candidates[0]
         
