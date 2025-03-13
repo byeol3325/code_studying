@@ -5,4 +5,8 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0006-zigzag-conversion](https://github.com/byeol3325/code_studying/tree/master/0006-zigzag-conversion) |
+## Math
+|  |
+| ------- |
+| [0007-reverse-integer](https://github.com/byeol3325/code_studying/tree/master/0007-reverse-integer) |
 <!---LeetCode Topics End-->
